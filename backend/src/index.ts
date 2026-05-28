@@ -6,6 +6,7 @@ import fs from 'fs'
 import { initializeDatabase } from './db/database'
 import authRoutes from './routes/auth'
 import serverRoutes from './routes/servers'
+import serverControlRoutes from './routes/serverControl'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -36,6 +37,7 @@ app.use(express.urlencoded({ extended: true }))
 // ── Routes ──────────────────────────────────────────────
 app.use('/api/auth', authRoutes)
 app.use('/api/servers', serverRoutes)
+app.use('/api/servers', serverControlRoutes)
 
 // Health check endpoint — useful for deployment platforms
 app.get('/api/health', (req, res) => {
@@ -55,7 +57,10 @@ app.use((req, res) => {
 
 // ── Start Server ─────────────────────────────────────────
 // ── Start Server ─────────────────────────────────────────
-initializeDatabase().then(() => {
+import { testDockerConnection } from './services/docker'
+
+initializeDatabase().then(async () => {
+  await testDockerConnection()
   app.listen(PORT, () => {
     console.log(`🚀 Backend running on http://localhost:${PORT}`)
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`)
