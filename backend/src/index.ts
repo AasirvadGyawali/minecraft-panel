@@ -12,6 +12,7 @@ import serverRoutes from './routes/servers'
 import serverControlRoutes from './routes/serverControl'
 import fileRoutes from './routes/files'
 import uploadRoutes from './routes/upload'
+import adminRoutes from './routes/admin'
 
 dotenv.config()
 
@@ -38,6 +39,7 @@ app.use('/api/servers', serverRoutes)
 app.use('/api/servers', serverControlRoutes)
 app.use('/api/servers', fileRoutes)
 app.use('/api/servers', uploadRoutes)
+app.use('/api/admin', adminRoutes)
 
 app.get('/api/health', (req, res) => {
   res.json({
