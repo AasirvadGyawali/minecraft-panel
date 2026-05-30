@@ -10,6 +10,7 @@ import { initializeWebSocket } from './websocket/consoleStream'
 import authRoutes from './routes/auth'
 import serverRoutes from './routes/servers'
 import serverControlRoutes from './routes/serverControl'
+import fileRoutes from './routes/files'
 
 dotenv.config()
 
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/auth', authRoutes)
 app.use('/api/servers', serverRoutes)
 app.use('/api/servers', serverControlRoutes)
+app.use('/api/servers', fileRoutes)
 
 app.get('/api/health', (req, res) => {
   res.json({

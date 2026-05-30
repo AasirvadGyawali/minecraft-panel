@@ -1,5 +1,5 @@
 'use client'
-
+import FileManager from '@/components/ui/FileManager'
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/layout/DashboardLayout'
@@ -184,6 +184,16 @@ export default function ServerDetailPage() {
         </h2>
         <Console serverId={server.id} serverStatus={server.status} />
       </div>
+
+      {/* File Manager */}
+{server.status === 'running' && (
+  <div className="mb-6">
+    <h2 className="text-lg font-semibold text-white mb-3">
+      File Manager
+    </h2>
+    <FileManager serverId={server.id} />
+  </div>
+)}
 
       {/* Connection Info */}
       {server.status === 'running' && (
