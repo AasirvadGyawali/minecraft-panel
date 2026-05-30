@@ -1,4 +1,5 @@
 'use client'
+import PluginUploader from '@/components/ui/PluginUploader'
 import FileManager from '@/components/ui/FileManager'
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
@@ -192,6 +193,18 @@ export default function ServerDetailPage() {
       File Manager
     </h2>
     <FileManager serverId={server.id} />
+  </div>
+)}
+  {/* Plugin Uploader */}
+{server.status === 'running' && (
+  <div className="mb-6">
+    <h2 className="text-lg font-semibold text-white mb-3">
+      Plugins & Mods
+    </h2>
+    <PluginUploader 
+      serverId={server.id} 
+      serverType={server.type}
+    />
   </div>
 )}
 
